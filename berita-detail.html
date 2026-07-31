@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title id="page-title">Berita — Kelurahan Lompo Riaja</title>
+<meta name="description" content="Berita dan pengumuman resmi Kelurahan Lompo Riaja, Kecamatan Tanete Riaja, Kabupaten Barru.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
+</head>
+<body>
+
+<header>
+  <div class="nav">
+    <div class="brand">
+      <img src="images/logo-barru.jpg" alt="Logo Kabupaten Barru" width="40" height="40" style="object-fit: contain;">
+      <div class="brand-text">
+        <div class="kel">Kelurahan Lompo Riaja</div>
+        <div class="kab">Kec. Tanete Riaja — Kab. Barru</div>
+      </div>
+    </div>
+    <nav class="links">
+      <a href="index.html#profil">Profil</a>
+      <a href="index.html#organisasi">Organisasi</a>
+      <a href="index.html#layanan">Layanan</a>
+      <a href="index.html#berita">Berita</a>
+      <a href="index.html#destinasi">Destinasi</a>
+      <a href="index.html#kontak">Kontak</a>
+    </nav>
+    <button class="burger" id="burger" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="index.html#profil">Profil</a>
+    <a href="index.html#organisasi">Organisasi</a>
+    <a href="index.html#layanan">Layanan</a>
+    <a href="index.html#berita">Berita</a>
+    <a href="index.html#destinasi">Destinasi</a>
+    <a href="index.html#kontak">Kontak</a>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="breadcrumb">
+    <a href="index.html">Beranda</a><span>/</span><a href="berita.html">Semua Berita</a><span>/</span><span id="crumb-title">Memuat...</span>
+  </div>
+
+  <div class="artikel-hero">
+    <div class="berita-date" id="art-date">—</div>
+    <h1 id="art-title">Memuat berita...</h1>
+    <div class="artikel-cover" id="art-cover"></div>
+  </div>
+
+  <div class="artikel-body" id="art-body">
+    <p>Sedang mengambil data berita...</p>
+  </div>
+
+  <div class="artikel-nav">
+    <a href="index.html" class="btn btn-ghost" style="border-color:var(--garis);color:var(--hijau-tua);">← Kembali ke Beranda</a>
+    <a href="berita.html" class="btn btn-primary" style="background:var(--hijau-tua);color:var(--krem);">Semua Berita →</a>
+  </div>
+</div>
+
+<br><br>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <img src="images/logo-barru.jpg" alt="Logo Kabupaten Barru" width="48" height="48" style="object-fit: contain;">
+        <div>
+          <div style="color:#F6F1E4;font-family:'Fraunces',serif;font-size:1.05rem;">Kelurahan Lompo Riaja</div>
+          <p>Portal resmi Pemerintah Kelurahan Lompo Riaja, Kecamatan Tanete Riaja, Kabupaten Barru.</p>
+        </div>
+      </div>
+      <div>
+        <h4>Navigasi</h4>
+        <a href="index.html#profil">Profil &amp; Visi Misi</a>
+        <a href="index.html#organisasi">Struktur Organisasi</a>
+        <a href="index.html#layanan">Layanan Surat</a>
+        <a href="index.html#berita">Berita</a>
+        <a href="index.html#destinasi">Destinasi & Situs Budaya</a>
+      </div>
+      <div>
+        <h4>Layanan Darurat</h4>
+        <li>Layanan Darurat Nasional — 112</li>
+        <li>Pemadam Kebakaran — 113</li>
+        <li>Kepolisian — 110</li>
+        <li>Ambulans / Kesehatan — 119</li>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 Pemerintah Kelurahan Lompo Riaja. Seluruh hak dilindungi.</span>
+      <span>Dikembangkan sebagai Program Kerja KKN Individu.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Mobile menu toggle
+  const burger = document.getElementById('burger');
+  const mobileMenu = document.getElementById('mobileMenu');
+  burger.addEventListener('click', () => {
+    burger.classList.toggle('open');
+    mobileMenu.classList.toggle('show');
+  });
+  mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+    burger.classList.remove('open');
+    mobileMenu.classList.remove('show');
+  }));
+
+  // Scroll reveal
+  const revealEls = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('in');
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  revealEls.forEach(el => io.observe(el));
+</script>
+
+<script>
+  // ============================================
+  // SUMBER DATA BERITA — GOOGLE SHEETS
+  // ============================================
+  const SHEET_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vR9A5iJMO6INaaz4OuU-0S42ruXf_RE3uHpJbCVdrVvGrf-OxB6wdo4vxlC3dpN7b69Z70d8_-D-Gf4/pub?gid=0&single=true&output=csv";
+
+  const params = new URLSearchParams(window.location.search);
+  const targetIndex = parseInt(params.get('i'), 10);
+
+  Papa.parse(SHEET_CSV_URL, {
+    download: true,
+    skipEmptyLines: true,
+    complete: function(results) {
+      const rows = results.data.filter(r =>
+        Array.isArray(r) && r.length >= 2 && typeof r[0] === 'string' && r[0].trim() !== ""
+      );
+      const dataRows = rows.slice(1);
+
+      if (isNaN(targetIndex) || !dataRows[targetIndex]) {
+        document.getElementById('art-title').textContent = "Berita tidak ditemukan";
+        document.getElementById('art-body').innerHTML = "<p>Data untuk berita ini tidak ditemukan.</p>";
+        return;
+      }
+
+      const [tanggal, judul, isi, namaFoto] = dataRows[targetIndex];
+
+      document.getElementById('page-title').textContent = (judul || 'Berita') + " — Kelurahan Lompo Riaja";
+      document.getElementById('crumb-title').textContent = judul || '';
+      document.getElementById('art-date').textContent = tanggal || '';
+      document.getElementById('art-title').textContent = judul || '(Tanpa judul)';
+
+      if (namaFoto && namaFoto.trim() !== '') {
+        const src = `images/${namaFoto.trim()}.jpg`;
+        document.getElementById('art-cover').innerHTML =
+          `<img class="img-fill" src="${src}" alt="${judul || ''}" onerror="this.style.display='none'">`;
+      }
+
+      const paragraf = (isi || '').split(/\n+/).filter(p => p.trim() !== '');
+      document.getElementById('art-body').innerHTML = paragraf.map(p => `<p>${p}</p>`).join('');
+    },
+    error: function(err) {
+      document.getElementById('art-title').textContent = "Gagal memuat data";
+      document.getElementById('art-body').innerHTML = "<p>Pastikan koneksi internet aktif dan coba muat ulang halaman.</p>";
+      console.error(err);
+    }
+  });
+</script>
+
+</body>
+</html>
